@@ -1,0 +1,61 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>ArcGIS JavaScript Tutorials: Create a Starter App</title>
+  <style>
+    html, body, #viewDiv {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+  
+    <link rel="stylesheet" href="https://js.arcgis.com/4.14/esri/themes/dark/main.css">
+  <script src="https://js.arcgis.com/4.14/"></script>
+  
+  <script>  
+    require([
+      "esri/Map",
+      "esri/views/MapView",
+      "esri/widgets/BasemapToggle",
+      "esri/widgets/BasemapGallery"
+    ], function(Map, MapView, BasemapToggle, BasemapGallery) {
+
+      var map = new Map({
+        basemap: "satellite"
+      });
+
+      var view = new MapView({
+        container: "viewDiv",
+        map: map,
+        center: [107.072660, 10.349690],
+        zoom: 14
+      });
+      
+//       var basemapToggle = new BasemapToggle({
+//         view: view,
+//         nextBasemap: "streets-navigation-vector"
+//       })
+      
+//       view.ui.add(basemapToggle, "bottom-right")
+      var basemapGallery = new BasemapGallery({
+        view: view,
+        source: {
+          portal: {
+            url: "http://www.arcgis.com",
+            useVectorBasemaps: false // Dung de load cac tieu de vector
+          }
+        }
+      })
+      
+      view.ui.add(basemapGallery, "top-right")
+
+    });
+  </script>
+</head>
+<body>
+  <div id="viewDiv"></div>
+</body>
+</html>
